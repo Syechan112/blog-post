@@ -1,0 +1,40 @@
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100%;
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-overflow-scrolling: touch; /* For older browsers and iOS support */
+    position: relative;
+}
+
+/* Ensure all content stays within viewport width */
+* {
+    max-width: 100vw;
+    box-sizing: border-box;
+}
+
+/* Optional: If you want to remove all scrollbars */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Ensure absolute/fixed positioned elements don't cause scrolling */
+*[style*="position: absolute"],
+*[style*="position: fixed"] {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
