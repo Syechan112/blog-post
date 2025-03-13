@@ -69,8 +69,8 @@ class PostController extends Controller
         $categories = Category::all();
 
         return view('posts.create', [
-            'title'  => 'Create Post',
-            'active' => 'posts',
+            'title'      => 'Create Post',
+            'active'     => 'posts',
             'categories' => $categories,
         ]);
     }
@@ -180,6 +180,16 @@ class PostController extends Controller
             'category' => $category,
             'posts'    => $posts,
         ]);
+    }
+
+    public function getChartData()
+    {
+        $posts = Post::selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        return response()->json($posts);
     }
 
 }

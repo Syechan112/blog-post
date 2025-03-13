@@ -69,4 +69,5 @@ class DatabaseSeeder extends Seeder
             'slug' => 'review-rekomendasi',
         ]);
     }
+    
 }

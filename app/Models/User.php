@@ -3,6 +3,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Post;
+use App\Models\Comment;
 use App\Models\Bookmark;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -76,5 +77,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Bookmark::class);
     }
+
+    public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
 
 }

@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\NotificationController;
 
 Route::get('/', function () {
     return view('home', [
@@ -52,6 +54,11 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('admin.bookmarks.store');
     Route::delete('/bookmarks/{id}', [BookmarkController::class, 'destroy'])->name('admin.bookmarks.destroy');
 
+    Route::get('/api/chart-data', [PostController::class, 'getChartData']);
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('admin.comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('admin.comments.destroy');
+
     Route::get('/settings', function () {
         return view('components.settings', [
             'title'  => 'Settings',
@@ -81,10 +88,17 @@ Route::group(['middleware' => 'role:user', 'prefix' => 'user'], function () {
     Route::get('/user/{id}/posts', [PostController::class, 'userPosts'])->name('user.posts');
     Route::get('/category/{slug}', [PostController::class, 'category'])->name('user.category.posts');
 
-
     Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('user.bookmarks.index');
     Route::post('/bookmarks', [BookmarkController::class, 'store'])->name('user.bookmarks.store');
     Route::delete('/bookmarks/{id}', [BookmarkController::class, 'destroy'])->name('user.bookmarks.destroy');
+
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('user.notifications.index');
+    Route::delete('/notifications/{id}', [NotificationController::class, 'destroy'])->name('user.notifications.destroy');
+    Route::post('/notifications/clear', [NotificationController::class, 'clear'])->name('user.notifications.clear');
+
+    Route::post('/comments', [CommentController::class, 'store'])->name('user.comments.store');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('user.comments.destroy');
+
 
     Route::get('/settings', function () {
         return view('components.settings', [

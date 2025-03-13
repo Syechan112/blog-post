@@ -29,17 +29,6 @@
                 </a>
             @endif
 
-            <a href="#"
-                class="block p-6 bg-white shadow-md rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out transform hover:-translate-y-1">
-                <div class="flex items-center">
-                    <i class="fas fa-shield-alt text-3xl text-green-500 mr-4"></i>
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">Security</h2>
-                        <p class="text-gray-600">Change your password and security settings</p>
-                    </div>
-                </div>
-            </a>
-
             @if (auth()->user()->role === 'admin')
                 <a href="{{ route('users.managements.index') }}"
                     class="block p-6 bg-white shadow-md rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out transform hover:-translate-y-1 sm:hidden">
@@ -52,29 +41,6 @@
                     </div>
                 </a>
             @endif
-
-            <a href="#"
-                class="block p-6 bg-white shadow-md rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out transform hover:-translate-y-1">
-                <div class="flex items-center">
-                    <i class="fas fa-bell text-3xl text-yellow-500 mr-4"></i>
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">Notifications</h2>
-                        <p class="text-gray-600">Manage your notification preferences</p>
-                    </div>
-                </div>
-            </a>
-
-            <a href="#"
-                class="block p-6 bg-white shadow-md rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out transform hover:-translate-y-1">
-                <div class="flex items-center">
-                    <i class="fas fa-user-secret text-3xl text-purple-500 mr-4"></i>
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800">Privacy</h2>
-                        <p class="text-gray-600">Manage your account privacy settings</p>
-                    </div>
-                </div>
-            </a>
-
 
         </div>
 

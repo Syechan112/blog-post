@@ -33,11 +33,23 @@
             <i class="fas fa-bookmark w-5 h-5 text-center"></i>
             <span x-show="sidebarOpen" class="ml-3 text-sm font-medium">Bookmarks</span>
         </a>
-        <a href="#"
-            class="flex items-center px-6 py-3 mt-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200">
-            <i class="fas fa-envelope w-5 h-5 text-center"></i>
-            <span x-show="sidebarOpen" class="ml-3 text-sm font-medium">Messages</span>
-        </a>
+        @if (auth()->user()->role === 'user')
+            <a href="{{ route('user.notifications.index') }}"
+                class="flex items-center px-6 py-3 mt-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200">
+                <i class="fas fa-bell w-5 h-5 text-center"></i>
+                <span x-show="sidebarOpen" class="ml-3 text-sm font-medium">Notifikasi</span>
+                @php
+                    $unreadCount = \App\Models\Notification::where('user_id', auth()->id())
+                        ->where('is_read', false)
+                        ->count();
+                @endphp
+                @if ($unreadCount > 0)
+                    <span class="ml-auto bg-red-500 text-white text-xs font-semibold px-1.5 py-0.5 rounded-full">
+                        {{ $unreadCount }}
+                    </span>
+                @endif
+            </a>
+        @endif
         <a href="{{ auth()->user()->role === 'admin' ? route('admin.settings') : route('user.settings') }}"
             class="flex items-center px-6 py-3 mt-2 text-gray-600 hover:text-indigo-600 hover:bg-gray-50 transition-colors duration-200 {{ $active === 'settings' ? 'bg-gray-200 text-indigo-600' : '' }}">
             <i class="fas fa-cog w-5 h-5 text-center"></i>
@@ -71,11 +83,26 @@
             <i class="fas fa-list text-xl"></i>
             <span class="text-xs mt-1">Posts</span>
         </a>
-        <a href="#"
-            class="flex flex-col items-center text-gray-600 hover:text-indigo-600 transition-colors duration-200">
-            <i class="fas fa-plus text-xl"></i>
-            <span class="text-xs mt-1">Add</span>
-        </a>
+        @if (auth()->user()->role === 'user')
+            <a href="{{ route('user.notifications.index') }}"
+                class="flex flex-col items-center text-gray-600 hover:text-indigo-600 transition-colors duration-200 {{ $active === 'notifications' ? 'text-indigo-600' : '' }}">
+                <div class="relative">
+                    <i class="fas fa-bell text-xl"></i>
+                    @php
+                        $unreadCount = \App\Models\Notification::where('user_id', auth()->id())
+                            ->where('is_read', false)
+                            ->count();
+                    @endphp
+                    @if ($unreadCount > 0)
+                        <span class="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full text-[10px]">
+                            {{ $unreadCount }}
+                        </span>
+                    @endif
+                </div>
+                <span class="text-xs mt-1">Notifikasi</span>
+            </a>
+        @endif
+        
         <a href="{{ auth()->user()->role === 'admin' ? route('admin.settings') : route('user.settings') }}"
             class="flex flex-col items-center text-gray-600 hover:text-indigo-600 transition-colors duration-200 {{ $active === 'settings' ? 'text-indigo-600' : '' }}">
             <i class="fas fa-cog text-xl"></i>

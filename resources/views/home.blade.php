@@ -100,112 +100,45 @@
         </div>
     </div>
 
-    <div id="content-1" class="content-1 flex flex-col justify-center items-center mt-5 mb-5">
-        <h1 class="text-4xl font-bold mb-1 text-center">Postingan Populer</h1>
-        <p class="text-center">Postingan dengan rate terbanyak</p>
-    </div>
-
-    <!-- Card Container -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 md:px-20 py-10">
-
-        <!-- Card 1 -->
-        <div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden">
-            <img class="w-full h-48 object-cover" src="https://picsum.photos/400/300" alt="Random Image">
-            <div class="p-5">
-                <h2 class="font-bold text-xl mb-2 text-gray-800">Nature Beauty</h2>
-                <p class="text-gray-600 text-base mb-4">Menikmati keindahan alam yang luar biasa.</p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
-                    Read More
-                </button>
-            </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden">
-            <img class="w-full h-48 object-cover" src="https://picsum.photos/400/300" alt="Random Image">
-            <div class="p-5">
-                <h2 class="font-bold text-xl mb-2 text-gray-800">City Lights</h2>
-                <p class="text-gray-600 text-base mb-4">Pesona kota dengan gemerlap lampu di malam hari.</p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
-                    Read More
-                </button>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden">
-            <img class="w-full h-48 object-cover" src="https://picsum.photos/400/300" alt="Random Image">
-            <div class="p-5">
-                <h2 class="font-bold text-xl mb-2 text-gray-800">Tech World</h2>
-                <p class="text-gray-600 text-base mb-4">Dunia teknologi terus berkembang dengan inovasi baru.</p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
-                    Read More
-                </button>
-            </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="max-w-sm bg-white rounded-lg shadow-lg overflow-hidden">
-            <img class="w-full h-48 object-cover" src="https://picsum.photos/400/300" alt="Random Image">
-            <div class="p-5">
-                <h2 class="font-bold text-xl mb-2 text-gray-800">Explore the World</h2>
-                <p class="text-gray-600 text-base mb-4">Jelajahi dunia dan temukan pengalaman baru.</p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
-                    Read More
-                </button>
-            </div>
-        </div>
 
     </div>
 
-    <section class="bg-gray-100 py-12">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center text-gray-800">Apa Kata Pembaca?</h2>
-            <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                @php
-                    $testimonials = [
-                        [
-                            'name' => 'Dian Putra',
-                            'role' => 'Pembaca Setia',
-                            'message' => 'Blog ini sangat membantu! Artikelnya selalu informatif dan inspiratif.',
-                        ],
-                        [
-                            'name' => 'Rizky Mahendra',
-                            'role' => 'Penulis Tamu',
-                            'message' => 'Menulis di platform ini sangat nyaman! UI/UX-nya top banget.',
-                        ],
-                        [
-                            'name' => 'Nadia Sari',
-                            'role' => 'Advertiser',
-                            'message' => 'Saya pasang iklan di sini dan hasilnya luar biasa! Banyak yang tertarik.',
-                        ],
-                        [
-                            'name' => 'Budi Santoso',
-                            'role' => 'Pelanggan',
-                            'message' => 'Saya sangat senang membaca konten dari blog ini, selalu fresh!',
-                        ],
-                    ];
-                @endphp
-
-                @foreach ($testimonials as $testimonial)
-                    <div class="bg-white p-6 rounded-lg shadow-lg">
-                        <p class="text-gray-600 italic">"{{ $testimonial['message'] }}"</p>
-                        <div class="flex items-center mt-4">
-                            <img class="w-12 h-12 rounded-full border-2 border-blue-500"
-                                src="https://picsum.photos/100?random={{ $loop->index }}"
-                                alt="{{ $testimonial['name'] }}">
-                            <div class="ml-4">
-                                <h3 class="text-lg font-semibold">{{ $testimonial['name'] }}</h3>
-                                <p class="text-gray-500 text-sm">{{ $testimonial['role'] }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
+<section x-data="{ activeTab: 'write' }" class="bg-gradient-to-r from-purple-100 to-blue-100 py-16">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-4xl font-bold mb-8 text-center text-purple-800">Discover WriteSpace</h2>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="mb-6 flex space-x-4 border-b border-purple-300">
+                    <button @click="activeTab = 'write'" :class="{ 'border-b-2 border-purple-600': activeTab === 'write' }" class="pb-2 px-4 text-lg font-semibold text-purple-800 focus:outline-none">Write</button>
+                    <button @click="activeTab = 'connect'" :class="{ 'border-b-2 border-purple-600': activeTab === 'connect' }" class="pb-2 px-4 text-lg font-semibold text-purple-800 focus:outline-none">Connect</button>
+                    <button @click="activeTab = 'grow'" :class="{ 'border-b-2 border-purple-600': activeTab === 'grow' }" class="pb-2 px-4 text-lg font-semibold text-purple-800 focus:outline-none">Grow</button>
+                </div>
+                <div x-show="activeTab === 'write'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100">
+                    <p class="text-lg mb-6 text-gray-700 leading-relaxed">
+                        WriteSpace provides a seamless writing experience with our intuitive editor. Craft your stories, articles, and ideas with ease. Our platform supports various formats and styles, allowing your creativity to flourish without technical limitations.
+                    </p>
+                </div>
+                <div x-show="activeTab === 'connect'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" style="display: none;">
+                    <p class="text-lg mb-6 text-gray-700 leading-relaxed">
+                        Join a vibrant community of writers and readers. Share your work, receive feedback, and collaborate with like-minded individuals. WriteSpace's social features make it easy to build your network and find your audience.
+                    </p>
+                </div>
+                <div x-show="activeTab === 'grow'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" style="display: none;">
+                    <p class="text-lg mb-6 text-gray-700 leading-relaxed">
+                        Take your writing to the next level with WriteSpace's growth tools. Track your progress, analyze your audience engagement, and leverage our promotional features to expand your readership and potentially monetize your content.
+                    </p>
+                </div>
+                <a href="{{ route('register.index') }}" class="inline-block bg-purple-600 text-white py-3 px-6 rounded-full hover:bg-purple-700 transition duration-300 ease-in-out transform hover:scale-105">Start Your Journey</a>
+            </div>
+            <div class="hidden md:block relative">
+                <img src="https://picsum.photos/seed/writeSpace/600/400" alt="WriteSpace Illustration" class="w-full h-auto rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105">
+                <div class="absolute inset-0 bg-gradient-to-tr from-purple-500 to-blue-500 opacity-20 rounded-lg"></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
 
 
     <footer class="bg-gray-400 text-black py-10">

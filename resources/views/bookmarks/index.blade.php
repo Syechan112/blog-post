@@ -10,9 +10,16 @@
             <div class="mt-6 bg-white rounded-lg shadow-md overflow-hidden mb-12">
                 <div class="px-6 py-4">
                     <h4 class="font-bold text-xl text-gray-800">{{ $bookmark->post->title }}</h4>
-                    <p class="text-gray-600 mt-2">By <a href=""
-                            class="text-indigo-600 hover:text-indigo-800">{{ $bookmark->post->user->name }}</a></p>
-                    <p class="text-gray-600 mt-2">Category: {{ $bookmark->post->category }}</p>
+                    <p class="text-gray-600 mt-2">Created by
+                        <a href="{{ auth()->user()->role === 'admin' ? route('admin.posts', $bookmark->post->user->id) : route('user.posts', $bookmark->post->user->id) }}"
+                            class="text-indigo-600 hover:text-indigo-800">
+                            {{ $bookmark->post->user->name }} In
+                            <a href="{{ auth()->user()->role === 'admin' ? route('admin.category.posts', $bookmark->post->category->slug) : route('user.category.posts', $bookmark->post->category->slug) }}"
+                                class="text-indigo-600 hover:text-indigo-800">
+                                {{ $bookmark->post->category->name }}
+                            </a>
+                        </a>
+                    </p>
                     <p class="text-gray-600 mt-2">{!! Str::limit(strip_tags($bookmark->post->content), 100) !!}</p>
                 </div>
                 <div class="px-6 py-4 bg-gray-100 flex justify-between items-center">

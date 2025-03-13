@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('font/font.css') }}">
 
+    <link rel="icon" type="image/png" href="{{ asset('icons/logo.png') }}">
+
+
     {{-- font --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
